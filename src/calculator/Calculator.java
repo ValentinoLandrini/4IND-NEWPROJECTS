@@ -50,6 +50,9 @@ public class Calculator {
         }
             //Output
         System.out.println(num1+" "+operator+" "+num2+": "+output);
+        
+        //diocanen
+        
     }
 }
 
