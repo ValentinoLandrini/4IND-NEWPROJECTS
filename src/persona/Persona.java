@@ -146,7 +146,7 @@ public class Persona {
         
         info = "cognome          : "  +  this.cognome + "\n"
               +"nome             : "  +  this.nome + "\n"
-              +"altezza          : "  +  this.DataDiNascita +"\n"
+              +"altezza          : "  +  this.altezza +"\n"
               +"peso             : "  +  this.peso + "\n"
               +"data di nascita  : "  +  this.DataDiNascita + "\n";
                 
