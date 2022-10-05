@@ -4,7 +4,7 @@ package persona;
  *
  * @author valentino.landrini
  */
-public class ProvaPersona {
+public class Persona1Prova {
 
     /**
      * @param args the command line arguments
