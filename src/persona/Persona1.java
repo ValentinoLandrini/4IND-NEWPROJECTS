@@ -1,11 +1,11 @@
 package persona;
 
 /**
- * la classe Persona definisce alcune caratteristiche di un essere umano 
+ * la classe Persona1 definisce alcune caratteristiche di un essere umano 
  * @author valentino.landrini
  * @version 0.1 28/09/2022 
  */
-public class Persona {
+public class Persona1 {
 
     public Double altezza;
     public String cognome;
@@ -21,7 +21,7 @@ public class Persona {
     * { @link #setPeso (Float peso) }                   <br>
     * { @link #setDataDiNascita(String datadinascita) } 
     */
-    public Persona() {
+    public Persona1() {
     }
     /**
      * 
@@ -34,7 +34,7 @@ public class Persona {
      * @param nome
      * @param peso 
      */
-    public Persona(Double altezza, String cognome, String DataDiNascita, String nome, Float peso) {
+    public Persona1(Double altezza, String cognome, String DataDiNascita, String nome, Float peso) {
         this.altezza = altezza;
         this.cognome = cognome;
         this.DataDiNascita = DataDiNascita;
