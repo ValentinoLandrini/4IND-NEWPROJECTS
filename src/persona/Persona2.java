@@ -16,10 +16,13 @@ public class Persona2 {
 
     /**
      * costruttore della classe persona senza parametri per impostare i
-     * parametri si possono usare i seguenti metodi { @link #setAltezza (double altezza)
-     * }            <br> { @link #setCognome (String cognome) }            <br> { @link #setNome (String nome)
-     * }                  <br> { @link #setPeso (Float peso) }                   <br> { @link #setDataDiNascita(String datadinascita)
-     * }
+     *         parametri si possono usare i seguenti metodi 
+     *                   { @link #setAltezza (double altezza) }
+     *              <br> { @link #setCognome (String cognome) }            
+     *              <br> { @link #setNome (String nome) }
+     *              <br> { @link #setPeso (Float peso) }                   
+     *              <br> { @link #setDataDiNascita(String dataDiNascita) }
+     * 
      */
     public Persona2() {
     }
@@ -31,7 +34,7 @@ public class Persona2 {
      *
      * @param altezza
      * @param cognome
-     * @param DataDiNascita
+     * @param dataDiNascita
      * @param nome
      * @param peso
      */
@@ -110,41 +113,49 @@ public class Persona2 {
 
             if (aaaa < 1900 || aaaa > 2022) {
                 giusto = false;
-                System.out.println("hai sbagliato");
+                System.out.println("Errore");
             }
-            if (gg < 1 || gg > 31) {
+            
+            
+            
+            
+            
+            
+            
+            
+          /*  if (gg < 1 || gg > 31) {
                 giusto = false;
-                System.out.println("hai sbagliato");
+                System.out.println("Errore");
             }
             if (mm < 1 || mm > 12) {
                 giusto = false;
-                System.out.println("hai sbagliato");
+                System.out.println("Errore");
             }
             if (mm == 1 || mm == 3 || mm == 5 || mm == 7 || mm == 8 || mm == 10 || mm == 12) {
                 if (gg < 1 || gg > 31) {
                     giusto = false;
-                    System.out.println("hai sbagliato");
+                    System.out.println("Errore");
                 }
             }
                 if (mm == 4 || mm == 6 || mm == 9 || mm == 11) {
                     if (gg < 1 || gg > 30) {
                         giusto = false;
-                        System.out.println("hai sbagliato");
+                        System.out.println("Errore");
                     }
                     if (mm == 2) {
                         if (gg < 1 || gg > 29) {
                             giusto = false;
-                            System.out.println("hai sbagliato");
+                            System.out.println("Errore");
                         }
                     }
 
-                }
+                }*/
             
             if (giusto) {
                 this.dataDiNascita = dataDiNascita;
             }
         } catch (NumberFormatException nfe) {
-            System.out.println("hai sbagliato");
+            System.out.println("Errore");
 
         }
     }
