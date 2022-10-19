@@ -1,5 +1,8 @@
 package persona;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+
 /**
  * la classe Persona2 definisce alcune caratteristiche di un essere umano
  *
@@ -8,21 +11,21 @@ package persona;
  */
 public class Persona2 {
 
-    public Double altezza;
-    public String cognome;
-    public String nome;
-    public Float peso;
+    private Double altezza;
+    private String cognome;
+    private String nome;
+    private Float peso;
     private String dataDiNascita;
 
     /**
      * costruttore della classe persona senza parametri per impostare i
-     *         parametri si possono usare i seguenti metodi 
-     *                   { @link #setAltezza (double altezza) }
-     *              <br> { @link #setCognome (String cognome) }            
-     *              <br> { @link #setNome (String nome) }
-     *              <br> { @link #setPeso (Float peso) }                   
-     *              <br> { @link #setDataDiNascita(String dataDiNascita) }
-     * 
+     * parametri si possono usare i seguenti metodi { @link #setAltezza (double altezza)
+     * }
+     * <br> { @link #setCognome (String cognome) }
+     * <br> { @link #setNome (String nome) }
+     * <br> { @link #setPeso (Float peso) }
+     * <br> { @link #setDataDiNascita(String dataDiNascita) }
+     *
      */
     public Persona2() {
     }
@@ -52,7 +55,6 @@ public class Persona2 {
      *
      * @return altezza
      */
-
     public Double getAltezza() {
         return altezza;
     }
@@ -107,53 +109,56 @@ public class Persona2 {
         String[] splitted = dataDiNascita.split("/");
         try {
             Boolean giusto = true;
+            ZoneId z = ZoneId.of("Europe/Rome");
+             ZonedDateTime zdt = ZonedDateTime.now(z);
             int gg = Integer.parseInt(splitted[0]);
             int mm = Integer.parseInt(splitted[1]);
             int aaaa = Integer.parseInt(splitted[2]);
+            int current_day = zdt.getDayOfMonth();
+            int current_month = zdt.getMonthValue();
+            int current_year = zdt.getYear();
+            
+            if(aaaa>current_year){
+            giusto=false;
+            
+            
+            }
+            switch (mm) {
+                case 1:
+                case 3:
+                case 5:
+                case 7:
+                case 8:
+                case 10:
+                case 12:
+                    if (gg < 1 || gg > 31) {
+                        giusto = false;
+                    }
+                    break;
 
-            if (aaaa < 1900 || aaaa > 2022) {
-                giusto = false;
-                System.out.println("Errore");
-            }
-            
-            
-            
-            
-            
-            
-            
-            
-          /*  if (gg < 1 || gg > 31) {
-                giusto = false;
-                System.out.println("Errore");
-            }
-            if (mm < 1 || mm > 12) {
-                giusto = false;
-                System.out.println("Errore");
-            }
-            if (mm == 1 || mm == 3 || mm == 5 || mm == 7 || mm == 8 || mm == 10 || mm == 12) {
-                if (gg < 1 || gg > 31) {
-                    giusto = false;
-                    System.out.println("Errore");
-                }
-            }
-                if (mm == 4 || mm == 6 || mm == 9 || mm == 11) {
+                case 4:
+                case 6:
+                case 9:
+                case 11:
                     if (gg < 1 || gg > 30) {
                         giusto = false;
-                        System.out.println("Errore");
                     }
-                    if (mm == 2) {
-                        if (gg < 1 || gg > 29) {
+                    break;
+               case 2:
+                    if (!(aaaa % 400 == 0 || (aaaa % 4 == 0 && aaaa % 100 != 0))) {
+                        if (gg < 1 || gg > 28) {
                             giusto = false;
-                            System.out.println("Errore");
                         }
-                    }
 
-                }*/
-            
-            if (giusto) {
-                this.dataDiNascita = dataDiNascita;
+                    }
+                   
             }
+             if (giusto) {
+                        this.dataDiNascita = dataDiNascita;
+                        
+                        
+                    }
+                        
         } catch (NumberFormatException nfe) {
             System.out.println("Errore");
 
@@ -175,7 +180,6 @@ public class Persona2 {
      *
      * @param nome
      */
-
     public void setNome(String nome) {
         this.nome = nome;
     }
@@ -195,9 +199,58 @@ public class Persona2 {
      *
      * @param peso
      */
-
     public void setPeso(Float peso) {
         this.peso = peso;
+    }
+
+    public String calcoloEta() {
+        boolean giusto = true;
+        ZoneId z = ZoneId.of("Europe/Rome");
+        System.out.println(z);
+        ZonedDateTime zdt = ZonedDateTime.now(z);
+        int eta = 0;
+        int mese = 0;
+        int giorni = 0;
+        String anni = null;
+        int current_day = zdt.getDayOfMonth();
+        int current_month = zdt.getMonthValue();
+        int current_year = zdt.getYear();
+        if(dataDiNascita == null)
+            giusto = false;
+        if (giusto) {
+
+            String[] splitted = dataDiNascita.split("/");
+
+            int gg = Integer.parseInt(splitted[0]);
+            int mm = Integer.parseInt(splitted[1]);
+            int aaaa = Integer.parseInt(splitted[2]);
+
+             eta = current_year - aaaa;
+            if (current_month < mm && current_day < gg) {
+                eta -= 1;
+            } else if (current_month < mm) {
+                eta -= 1;
+            }
+            mese = current_month - mm;
+             if (current_day < gg) {
+                eta -= 1;
+            } else if (current_day < gg) {
+                eta -= 1;
+            }
+             giorni = current_day - gg;
+             
+              if (current_day < gg) {
+                eta -= 1;
+            
+            }
+             
+             
+             
+             anni = (eta+" anni "+mese + " mesi/e " + giorni + " e giorni/o");
+        }
+        return anni;
+        
+        
     }
 
     /**
@@ -205,7 +258,6 @@ public class Persona2 {
      *
      * @return riepilogo caratteristiche
      */
-
     public String info() {
         String info = "";
 
