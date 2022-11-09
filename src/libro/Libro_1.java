@@ -1,4 +1,4 @@
-package bridi;
+package libro;
 
 /**
  *
