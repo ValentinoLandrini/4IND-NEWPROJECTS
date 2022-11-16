@@ -16,6 +16,11 @@ public class Persona2 {
     private String nome;
     private Float peso;
     private String dataDiNascita;
+    private final ZoneId z = ZoneId.of("Europe/Rome");
+    private final ZonedDateTime zdt = ZonedDateTime.now(z);
+    private int current_day = zdt.getDayOfMonth();
+    private int current_month = zdt.getMonthValue();
+    private int current_year = zdt.getYear();
 
     /**
      * costruttore della classe persona senza parametri per impostare i
@@ -109,19 +114,13 @@ public class Persona2 {
         String[] splitted = dataDiNascita.split("/");
         try {
             Boolean giusto = true;
-            ZoneId z = ZoneId.of("Europe/Rome");
-             ZonedDateTime zdt = ZonedDateTime.now(z);
             int gg = Integer.parseInt(splitted[0]);
             int mm = Integer.parseInt(splitted[1]);
             int aaaa = Integer.parseInt(splitted[2]);
-            int current_day = zdt.getDayOfMonth();
-            int current_month = zdt.getMonthValue();
-            int current_year = zdt.getYear();
-            
-            if(aaaa>current_year){
-            giusto=false;
-            
-            
+
+            if (aaaa > current_year) {
+                giusto = false;
+
             }
             switch (mm) {
                 case 1:
@@ -144,21 +143,20 @@ public class Persona2 {
                         giusto = false;
                     }
                     break;
-               case 2:
+                case 2:
                     if (!(aaaa % 400 == 0 || (aaaa % 4 == 0 && aaaa % 100 != 0))) {
                         if (gg < 1 || gg > 28) {
                             giusto = false;
                         }
 
                     }
-                   
+
             }
-             if (giusto) {
-                        this.dataDiNascita = dataDiNascita;
-                        
-                        
-                    }
-                        
+            if (giusto) {
+                this.dataDiNascita = dataDiNascita;
+
+            }
+
         } catch (NumberFormatException nfe) {
             System.out.println("Errore");
 
@@ -205,52 +203,53 @@ public class Persona2 {
 
     public String calcoloEta() {
         boolean giusto = true;
-        ZoneId z = ZoneId.of("Europe/Rome");
         System.out.println(z);
-        ZonedDateTime zdt = ZonedDateTime.now(z);
         int eta = 0;
         int mese = 0;
         int giorni = 0;
         String anni = null;
-        int current_day = zdt.getDayOfMonth();
-        int current_month = zdt.getMonthValue();
-        int current_year = zdt.getYear();
-        if(dataDiNascita == null)
+        if (dataDiNascita == null) {
             giusto = false;
+        }
         if (giusto) {
-
             String[] splitted = dataDiNascita.split("/");
-
             int gg = Integer.parseInt(splitted[0]);
             int mm = Integer.parseInt(splitted[1]);
             int aaaa = Integer.parseInt(splitted[2]);
 
-             eta = current_year - aaaa;
+            eta = current_year - aaaa;
             if (current_month < mm && current_day < gg) {
                 eta -= 1;
             } else if (current_month < mm) {
                 eta -= 1;
             }
             mese = current_month - mm;
-             if (current_day < gg) {
-                eta -= 1;
-            } else if (current_day < gg) {
-                eta -= 1;
+            giorni = current_day - gg;
+            System.out.println(mese);
+            if (mm == 1 || mm == 3 || mm == 5 || mm == 7 || mm == 8 || mm == 10 || mm == 12) {
+                if (giorni < 0) {
+                    mese = mese - 1;
+                }
+                giorni = giorni + 31;
+
             }
-             giorni = current_day - gg;
-             
-              if (current_day < gg) {
-                eta -= 1;
-            
+            if (mm == 4 || mm == 6 || mm == 9 || mm == 11) {
+                if (giorni < 0) {
+                    mese = mese - 1;
+                }
+                giorni = giorni + 30;
             }
-             
-             
-             
-             anni = (eta+" anni "+mese + " mesi/e " + giorni + " e giorni/o");
+            if (mm == 8) {
+                if (giorni < 0) {
+                    mese = mese - 1;
+                }
+                giorni = giorni + 29;
+            }
+
+            anni = (eta + " anni " + mese + " mesi/e " + giorni + " e giorni/o");
         }
         return anni;
-        
-        
+
     }
 
     /**

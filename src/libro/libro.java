@@ -6,98 +6,151 @@ package libro;
  */
 public class libro {
 
+    private final Float costoFISSO = 5.40f;
+
     private String[] autori;
     private String casaEditrice;
-    private final Float costo = 5.40f;
+    private Float costo;
     private String titolo;
     private Integer nPagine;
 
     public libro() {
 
     }
-/**
- * 
- * @param Autori
- * @param casaEditrice
- * @param titolo
- * @param nPagine 
- */
-    public libro(String[] Autori, String casaEditrice, String titolo, int nPagine) {
-        this.autori = Autori;
-        this.casaEditrice = casaEditrice;
-        this.titolo = titolo;
-        this.nPagine = nPagine;
-    }
+
     /**
-    * restituisce 
-    * @return autori
-    */
+     *
+     * @param Autori
+     * @param casaEditrice
+     * @param titolo
+     * @param nPagine
+     */
+    public libro(String[] Autori, String casaEditrice, String titolo, int nPagine) {
+        setAutori(autori);
+        setCasaEditrice(casaEditrice);
+        setTitolo(titolo);
+        setnPagine(nPagine);
+    }
+
+    /**
+     * restituisce
+     *
+     * @return autori
+     */
     public String[] getAutori() {
         return autori;
     }
-    /** 
-    * 
-    * @param Autori 
-    */
-    public void setAutori(String[] Autori) {
-        this.autori = autori;
-    }
+
     /**
-     * 
-     * @return casaEditrice 
+     *
+     * @param Autori
+     */
+    public void setAutoriErrato(String[] autori) {
+        String[] nominativo;
+        Integer cont = 0;
+        if(autori != null && autori.length > 0)
+           for(int i = 0; i< autori.length; i++){
+              if(autori[i] != null){
+                 nominativo = autori[i].split(" ");
+                 if(nominativo.length>1)
+                     cont++;
+            }
+        }
+        if(cont == autori.length)
+            this.autori = autori;
+
+}
+                
+    final public void setAutori(String[] autori){
+    String[] newAutori;
+   newAutori = new String[autori.length];
+   for(int i = 0 ; i < autori.length; i++)
+       newAutori[i] = autori[i];
+    
+    String[] nominativo;
+    Integer cont =0;
+    
+    if(newAutori != null && newAutori.length>0);
+        
+        
+    }
+
+    /**
+     *
+     * @return casaEditrice
      */
     public String getCasaEditrice() {
         return casaEditrice;
     }
+
     /**
-     * 
-     * @param casaEditrice 
+     *
+     * @param casaEditrice
      */
     public void setCasaEditrice(String casaEditrice) {
-        this.casaEditrice = casaEditrice;
+        Boolean valida = true;
+        if (casaEditrice != null && casaEditrice.length() > 0) {
+            for (int i = 0; i < casaEditrice.length(); i++) 
+                if (casaEditrice.charAt(i) == (char) 32) 
+                    valida = false;
+                
+            if (valida) 
+                this.casaEditrice = casaEditrice;
+            
+
+        }
     }
+
     /**
-     * 
+     *
      * @return costo
      */
     public float getCosto() {
         return costo;
     }
+
     /**
-     * 
+     *
      * @return titolo
      */
     public String getLibro() {
         return titolo;
     }
+
     /**
-     * 
-     * @param Libro 
+     *
+     * @param titolo
      */
-    public void setLibro(String Libro) {
-        this.titolo = titolo;
+    public void setLibro(String Titolo) {
+        this.titolo = Titolo;
     }
+
     /**
-     * 
-     * @return nPagine 
+     *
+     * @return nPagine
      */
     public int getnPagine() {
         return nPagine;
     }
+
     /**
-     * 
-     * @param nPagine 
+     *
+     * @param nPagine
      */
-    public void setnPagine(int nPagine) {
-        this.nPagine = nPagine;
+    public void setnPagine(Integer nPagine) {
+        if(nPagine != null && nPagine> 0 && nPagine%2 == 0)
+            this.nPagine = nPagine;
+        
+        
     }
+
     /**
-     * 
-     * @param titolo 
+     *
+     * @param titolo
      */
     public final void setTitolo(String titolo) {
         Boolean valido = false;
-        if (titolo != null) {
+        if (titolo != null && titolo.length() > 0) {
             char primo = titolo.charAt(0);
             int primoInt = (int) primo;
             for (int i = 65; i < 91; i++) {
@@ -107,25 +160,46 @@ public class libro {
             }
         }
     }
-/**
- * 
- * @return info
- */
-    public String gatinfo() {
-            String autoriString = "";
-            if(autori !=null){
-            for(String autore : this.autori){
-            autoriString += autore+ ", ";
-            
-            
+    public Integer contaAutori(){
+    if(autori != null && autori.length > 0)
+        return autori.length;
+    
+    else return 0;
+    
+    }
+    
+    public void ordinaAutori(){
+    String temp;
+    
+            for(int i = 0; i > autori.length-1; i++)
+                for(int j=  i+1; j<autori.length; j++)
+                    if((char)autori[i].toUpperCase().charAt(0)>(char)autori[j].toUpperCase().charAt(0)){
+                    temp = autori[i];
+                    autori[i] = autori[j];
+                    autori[j] = temp;
+                    
+                    }
+    }
+    
+    
+    /**
+     *
+     * @return info
+     */
+    public String getinfo() {
+        String autoriString = "";
+        if (autori != null) {
+            for (String autore : this.autori) {
+                autoriString += autore + ", ";
+
             }
-            }
-            
-        return "\n titolo" +(titolo !=null? this.titolo: "titolo")
-               + "\n autore" +(autori !=null? this.autori: "")
-               + "\n casa Editrice" + (casaEditrice !=null? this.casaEditrice: "casa editrice")
-               + "\n pagine " + (nPagine !=null? this.nPagine :"pagine")
-               + "\n costo " + (costo <5.40f? this.costo : "costo");
+        }
+
+        return "\n titolo" +            (titolo != null ?titolo : "titolo")
+                + "\n autore" +         (autori != null ?autori : "")
+                + "\n casa Editrice" +  (casaEditrice != null ?casaEditrice : "casa editrice")
+                + "\n pagine " +        (nPagine != null ?nPagine : "pagine")
+                + "\n costo " +         (costo < 5.40f ?costo : "costo");
     }
 
 }
