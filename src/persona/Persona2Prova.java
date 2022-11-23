@@ -12,7 +12,7 @@ public class Persona2Prova {
     public static void main(String[] args) {
 
         Persona1 p1 = new Persona1();
-        Persona2 p2 = new Persona2(1.80, "landrini", "19/9/2004", "valentino", 55f);
+        Persona2 p2 = new Persona2(1.80, "landrini", "19/8/2004", "valentino", 55f);
 
         String info = p2.info();
 
