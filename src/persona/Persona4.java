@@ -70,6 +70,8 @@ public class Persona4 {
      * @param peso
      */
     public Persona4(Double altezza, String cognome, String dataDiNascita, String nome, Float peso) {
+        this();
+        
         this.altezza = altezza;
         this.cognome = cognome;
         this.nome = nome;
@@ -237,7 +239,7 @@ public class Persona4 {
         this.peso = peso;
     }
 
-    public int getNumeroIstanze() {
+    public static int getNumeroIstanze() {
 
         return numeroIstanze;
     }
@@ -300,6 +302,13 @@ public class Persona4 {
         }
         return false;
     }
+    public static Boolean verificaOmonimia(Persona4 persona, Persona4 persona1) {
+        if( persona.nome.equals(persona1.nome)&& persona.cognome.equals(persona1.cognome)){
+            return true;
+        }
+            return false;
+    }
+    
 
     /**
      * restituisce le caratteristiche della persona
@@ -309,11 +318,12 @@ public class Persona4 {
     public String info() {
         String info = "";
 
-        info = "cognome          : " + this.cognome + "\n"
+        info =    "cognome          : " + this.cognome + "\n"
                 + "nome             : " + this.nome + "\n"
                 + "altezza          : " + this.altezza + "\n"
                 + "peso             : " + this.peso + "\n"
-                + "data di nascita  : " + this.dataDiNascita + "\n";
+                + "data di nascita  : " + this.dataDiNascita + "\n"
+                + "Numero Istanze   : " + this.numeroIstanze;
 
         return info;
     }
