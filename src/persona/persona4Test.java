@@ -1,5 +1,7 @@
 package persona;
 
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -170,6 +172,7 @@ public class persona4Test extends javax.swing.JFrame {
 
     private void btnGetCognomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetCognomeActionPerformed
      txtGetCognome.setText(p.getCognome());
+        
      
         // TODO add your handling code here:
         
