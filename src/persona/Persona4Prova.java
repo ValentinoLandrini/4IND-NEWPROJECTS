@@ -15,6 +15,7 @@ public class Persona4Prova {
        
         Persona4 p4 = new Persona4(1.80, "landrini", "19/8/2004", "valentino", 55f);
         Persona4 p5 = new Persona4(1.80, "landrini", "19/8/2004", "valentino", 55f);
+        Persona4[] abitanti = null;
         Citta c1 = new Citta(abitanti, "Trento", p5,"129738");
 
         String info = p4.info();

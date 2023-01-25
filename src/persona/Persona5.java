@@ -49,16 +49,13 @@ package persona;
       */
      public Persona5(Double altezza, String cognome, String dataDiNascita, String nome, Float peso) throws Exception {
          this();
-         try {
+        
              this.setCognome(cognome);
              this.setDataDiNascita(dataDiNascita);
              this.setAltezza(altezza);
              this.setNome(nome);
              this.setPeso(peso);
-         }
-         catch(Exception e) {
-             throw new Exception(e);
-         }
+        
      }
      
      public Persona5(Persona5 persona) {
@@ -123,7 +120,7 @@ package persona;
              this.cognome = cognome;
          }
          else {
-             throw new Exception("Invalid surname format! (First letter must be capital and the rest lowecase)");
+             throw new Exception("Cognome invalido!");
          }
      }
  
@@ -172,7 +169,7 @@ package persona;
                  this.nome = nome;
              }
              else {
-                 throw new Exception("Invalid name format! (First letter must be capital and the rest lowecase)");
+                 throw new Exception("Invalid name");
              }
          }
          
@@ -198,7 +195,7 @@ package persona;
              this.peso = peso;
          }
          else {
-             throw new Exception("Invalid weight format!");
+             throw new Exception("Invalid peso ");
          }
      }
      

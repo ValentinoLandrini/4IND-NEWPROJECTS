@@ -13,6 +13,7 @@ public class Citta {
     private Integer densitPopolazione;
     private Integer etaMedia;
     private Integer numeroOmonimi;
+    String infoc;
 
     public Citta() {
     }
