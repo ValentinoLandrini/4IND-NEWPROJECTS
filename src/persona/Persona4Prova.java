@@ -10,7 +10,8 @@ public class Persona4Prova {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-
+        Persona4[] arr = new Persona4[5];
+        
        
         Persona4 p4 = new Persona4(1.80, "landrini", "19/8/2004", "valentino", 55f);
         Persona4 p5 = new Persona4(1.80, "landrini", "19/8/2004", "valentino", 55f);
