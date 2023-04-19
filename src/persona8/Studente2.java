@@ -17,7 +17,7 @@ public class Studente2 extends Persona8 {
         super();
     }
 
-    public Studente2(Integer Classe, Boolean isRipetente, Float[] voti, Double altezza, String cognome, String nome, Float peso, String dataDiNascita, String password, String email) throws Exception {
+    public Studente2(Integer Classe, Boolean isRipetente, ArrayList<Float> voti, Double altezza, String cognome, String nome, Float peso, String dataDiNascita, String password, String email) throws Exception {
         super(altezza, cognome, nome, peso, dataDiNascita, password, email);
         this.classe = Classe;
         this.isRipetente = isRipetente;
