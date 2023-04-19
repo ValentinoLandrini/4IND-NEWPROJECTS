@@ -2,10 +2,8 @@ package persona8;
 
 import data.Data;
 import java.time.LocalDate;
-import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.regex.*;
 
 public class Persona8 {
 
@@ -17,13 +15,21 @@ public class Persona8 {
     String password;
     private String email;
 
-    private static int numeroIstanze;
+    public static int numeroIstanze;
 
     public Persona8() {
         numeroIstanze++;
     }
 
     /**
+     * @param altezza
+     * @param cognome
+     * @param nome
+     * @param peso
+     * @param dataDiNascita
+     * @param password
+     * @param email
+     * 
      * @throws Exception
      */
     public Persona8(Double altezza, String cognome, String nome, Float peso, String dataDiNascita, String password, String email) throws Exception {
@@ -200,7 +206,7 @@ public class Persona8 {
         boolean minuscolo = false;
         boolean maiuscolo = false;
         if (password != null) {
-            if (password.matches("(.*)[[:world:]](.*)")) {
+            if (password.matches("(.*)[[:word:]](.*)")) {
 
                 minuscolo = true;
                 maiuscolo = true;

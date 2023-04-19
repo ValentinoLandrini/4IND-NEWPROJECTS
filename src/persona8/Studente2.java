@@ -1,23 +1,23 @@
 package persona8;
 
 import java.util.*;
-
+import java.util.ArrayList;
 /**
  *
  * @author valentino.landrini
  */
-public class Studente1 extends Persona8 {
+public class Studente2 extends Persona8 {
 
     public static String SCUOLA = "I.T.T Buonarroti";
     private Integer classe;
     private Boolean isRipetente;
-    private Float voti[];
+     ArrayList <Float> voti;
 
-    public Studente1() {
+    public Studente2() {
         super();
     }
 
-    public Studente1(Integer Classe, Boolean isRipetente, Float[] voti, Double altezza, String cognome, String nome, Float peso, String dataDiNascita, String password, String email) throws Exception {
+    public Studente2(Integer Classe, Boolean isRipetente, Float[] voti, Double altezza, String cognome, String nome, Float peso, String dataDiNascita, String password, String email) throws Exception {
         super(altezza, cognome, nome, peso, dataDiNascita, password, email);
         this.classe = Classe;
         this.isRipetente = isRipetente;
@@ -56,7 +56,8 @@ public class Studente1 extends Persona8 {
     }
 
     public Float[] getVoti() {
-        return voti;
+        voti.get(0);
+            
     }
 
     public void setVoti(Float voti[]) throws Exception {
@@ -77,9 +78,9 @@ public class Studente1 extends Persona8 {
     public void aggiungVoto(Float voto) throws Exception {
         if (voto != null) {
             if (voto < 3 && voto > 10) {
-                Float[] voto1 = new Float[voti.length + 1];
-                for (int i = 0; i < voti.length; i++) {
-                    voto1[i] = voti[i];
+                Float[] voto1 = new Float[voti.size() + 1];
+                for (int i = 0; i < voti.size(); i++) {
+                    voti.set(i, voti.get(i));
 
                 }
                 voto1[voto1.length - 1] = voto;
@@ -91,17 +92,24 @@ public class Studente1 extends Persona8 {
         }
     }
 
+    public void rimuoviUltimoVoto() {
+        if (voti != null) {
+           
+            
+        }
+    }
+
     public void rimuoviVoto(Integer posizione) throws Exception {
         if (voti != null) {
 
-            if (posizione != null && posizione > -1 && posizione < voti.length) {
+            if (posizione != null && posizione > -1 && posizione < voti.size()) {
 
-                Float[] voto1 = new Float[voti.length - 1];
-                for (int i = 0; i < voti.length; i++) {
+                Float[] voto1 = new Float[voti.size() - 1];
+                for (int i = 0; i < voti.size(); i++) {
                     if (posizione == i) {
                         i++;
                     } else {
-                        voto1[i] = voti[i];
+                        voti.set(i, voti.get(i));
                     }
                 }
             } else {
@@ -144,29 +152,55 @@ public class Studente1 extends Persona8 {
         }
 
     }
-    
-    private Float votoMinore(){
-    if(voti != null){
-        int max = 0;
-        for(Float v : voti){
-        
-        
+
+    private Float votoMinore() {
+        Float min = 10f;
+        if (voti != null) {
+
+            for (Float v : voti) {
+                if (v < min) {
+                    min = v;
+
+                }
+
+            }
+
         }
-    
+        return min;
     }
-    return null;
-    }
-    private Float votoMaggiore(){
-    
-    return null;
+
+    private Float votoMaggiore() {
+        Float max = 0f;
+        if (voti != null) {
+
+            for (Float v : voti) {
+                if (v > max) {
+                    max = v;
+
+                }
+
+            }
+
+        }
+        return max;
     }
 
     private Float mediaVoti() {
         Float media = 0f;
-        for (int i = 0; i < voti.length; i++) {
-            media = media + voti[i];
+        for (int i = 0; i < voti.size(); i++) {
+            media = media + voti.get(i);
         }
-
-        return media / voti.length;
+        return media / voti.size();
     }
+
+    public String info() throws Exception {
+        String stringa = super.info();
+        stringa += "la classe e'        : " + classe + "\n";
+        stringa += "e' ripetente        : " + isRipetente + "\n";
+        stringa += "il voto minore e'   : " + votoMinore() + "\n";
+        stringa += "il voto maggiore e' : " + votoMaggiore() + "\n";
+        stringa += "la media dei voti e': " + mediaVoti() + "\n";
+        return stringa;
+    }
+
 }

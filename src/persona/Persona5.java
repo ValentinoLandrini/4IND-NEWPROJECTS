@@ -15,7 +15,7 @@ package persona;
      private final ZoneId z = ZoneId.of("Europe/Rome");
      private final ZonedDateTime zdt = ZonedDateTime.now(z);
      
-     private Integer giornoAttuale;
+        private Integer giornoAttuale;
      private Integer meseAttuale;
      private Integer annoAttuale;
      
