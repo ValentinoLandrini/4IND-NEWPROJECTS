@@ -1,43 +1,47 @@
 package persona8;
 
-import java.util.*;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
- * @author valentino.landrini
+ * @author giacomo.grattarola
  */
 public class Studente2 extends Persona8 {
 
-    public static String SCUOLA = "I.T.T Buonarroti";
+    public final String SCUOLA = "I.T.T Buonarroti";
     private Integer classe;
     private Boolean isRipetente;
-     ArrayList <Float> voti;
+    private ArrayList<Float> voti;
 
     public Studente2() {
         super();
     }
 
-    public Studente2(Integer Classe, Boolean isRipetente, ArrayList<Float> voti, Double altezza, String cognome, String nome, Float peso, String dataDiNascita, String password, String email) throws Exception {
+    public Studente2(Double altezza, String cognome, String nome, Float peso, String dataDiNascita, String password, String email, Integer classe, Boolean isRipetente) throws Exception {
         super(altezza, cognome, nome, peso, dataDiNascita, password, email);
-        this.classe = Classe;
-        this.isRipetente = isRipetente;
-        this.voti = voti;
-    }
+        this.setClasse(classe);
+        this.setIsRipetente(isRipetente);
 
-    public static String getSCUOLA() {
-        return SCUOLA;
     }
 
     public Integer getClasse() {
-        return this.classe;
+        return classe;
     }
 
     public void setClasse(Integer classe) throws Exception {
-        if (classe != null && classe < 0 && classe > 6) {
-            throw new Exception("la classe non puo essere vuota, minore di 0 o maggiore di 5");
-
+        if (classe != null) {
+            if (classe > 0 && classe < 6) {
+                this.classe = classe;
+            } else {
+                throw new Exception("la classe deve essere compresa tra 1 e 5");
+            }
+        } else {
+            throw new Exception("deve essere diversi da null");
         }
-        this.classe = classe;
     }
 
     public Boolean getIsRipetente() {
@@ -47,160 +51,168 @@ public class Studente2 extends Persona8 {
     public void setIsRipetente(Boolean isRipetente) throws Exception {
         if (isRipetente != null) {
             this.isRipetente = isRipetente;
-
         } else {
-            throw new Exception("l'attributo isRipetente non puo essere nullo.");
-
+            throw new Exception("deve essere diversi da null");
         }
 
     }
 
-    public Float[] getVoti() {
-        voti.get(0);
-            
+    public ArrayList<Float> getVoti() {
+        return  (ArrayList<Float>) voti.clone();
     }
 
-    public void setVoti(Float voti[]) throws Exception {
+    public void setVoti(ArrayList<Float> voti) throws Exception {
+
         if (voti != null) {
-            for (Float v : voti) {
-                if (v != null && v > 3 && v < 10) {
-                } else {
-                    throw new Exception("il voto non puo essere nullo, maggiore di 10 o minore di 3");
-                }
-            }
-            this.voti = voti;
-        } else {
-            throw new Exception("l'attributo voti non puo essere nullo.");
-        }
+            for (int i = 0; i < voti.size(); i++) {
+                if (voti.get(i) != null && voti.get(i) >= 3 && voti.get(i) <= 10) {
+                    if (voti.get(i) % 0.25 == 0) {
 
-    }
-
-    public void aggiungVoto(Float voto) throws Exception {
-        if (voto != null) {
-            if (voto < 3 && voto > 10) {
-                Float[] voto1 = new Float[voti.size() + 1];
-                for (int i = 0; i < voti.size(); i++) {
-                    voti.set(i, voti.get(i));
-
-                }
-                voto1[voto1.length - 1] = voto;
-            } else {
-                throw new Exception("il voto deve essere compreso tra 3 e 10");
-            }
-        } else {
-            throw new Exception("voto non puo essere nullo");
-        }
-    }
-
-    public void rimuoviUltimoVoto() {
-        if (voti != null) {
-           
-            
-        }
-    }
-
-    public void rimuoviVoto(Integer posizione) throws Exception {
-        if (voti != null) {
-
-            if (posizione != null && posizione > -1 && posizione < voti.size()) {
-
-                Float[] voto1 = new Float[voti.size() - 1];
-                for (int i = 0; i < voti.size(); i++) {
-                    if (posizione == i) {
-                        i++;
                     } else {
-                        voti.set(i, voti.get(i));
+                        throw new Exception("Deve essere divisibile per 0,25");
                     }
+                } else {
+                    throw new Exception("Il voto deve essere compreso tra 3 e 10");
                 }
-            } else {
-                throw new Exception("la posizione non puo essere ne null ne maggiore di voti.length ne minore di -1");
-
             }
-        } else {
-            throw new Exception("voti non puo essere null");
 
+           this.voti=(ArrayList<Float>) voti.clone() ;
+
+        } else {
+            throw new Exception("deve essere diversi da null");
         }
+
+    }
+
+    public void aggiungiVoto(Float voto) {
+        voti.add(voto);
+        this.voti = this.voti=(ArrayList<Float>) voti.clone();
+    }
+
+    public void rimuoviVoto(Integer posizione) {
+       voti.remove(posizione);
+
+        this.voti = this.voti=(ArrayList<Float>) voti.clone();
+    }
+    public void rimuoviUltimoVoto() {
+       voti.remove(voti.size()-1);
+
+        this.voti = this.voti=(ArrayList<Float>) voti.clone();
+    }
+    public void ordinaVotoCrescente() {
+        ArrayList<Float> f=(ArrayList<Float>) voti.clone();
+
+        Collections.sort(f);
+        this.voti=f;
+
+    }
+    public void ordinaVotoDecrescente() {
+        ArrayList<Float> f=(ArrayList<Float>) voti.clone();
+        Collections.sort(f, Collections.reverseOrder());
+        this.voti=f;
     }
 
     public Boolean promuovi() throws Exception {
-        if (mediaVoti() > 6f) {
-
-            classe = classe + 1;
-            if (classe > 5) {
-                throw new Exception("BRAVO HAI SUPERATO LA QUINTA");
-            }
-            return true;
-
+        Boolean b = false;
+        if (classe != 5) {
+            classe++;
+            b = true;
+            isRipetente=false;
         } else {
-            return false;
-
+            throw new Exception("� gi� in 5");
         }
+        return b;
     }
 
     public Boolean promuovi(Integer numeroClassi) throws Exception {
-        if (mediaVoti() > 6f) {
-
-            classe = classe + numeroClassi;
-            if (classe > 5) {
-                throw new Exception("BRAVO HAI SUPERATO LA QUINTA");
-            }
-            return true;
-
-        } else {
-            return false;
-
-        }
-
-    }
-
-    private Float votoMinore() {
-        Float min = 10f;
-        if (voti != null) {
-
-            for (Float v : voti) {
-                if (v < min) {
-                    min = v;
-
-                }
-
+        Boolean b = false;
+        if (numeroClassi != null) {
+            if (classe + numeroClassi != 5) {
+                classe += numeroClassi;
+                b = true;
+                isRipetente=false;
+            } else {
+                throw new Exception("� gi� in 5");
             }
 
         }
-        return min;
+
+        return b;
     }
 
-    private Float votoMaggiore() {
-        Float max = 0f;
-        if (voti != null) {
-
-            for (Float v : voti) {
-                if (v > max) {
-                    max = v;
-
-                }
-
-            }
-
-        }
-        return max;
-    }
-
-    private Float mediaVoti() {
-        Float media = 0f;
+    public Float votoMinore() {
+        Float b = 11f;
         for (int i = 0; i < voti.size(); i++) {
-            media = media + voti.get(i);
+            if (voti.get(i) < b) {
+                b = voti.get(i);
+            }
+
         }
-        return media / voti.size();
+        return b;
     }
 
-    public String info() throws Exception {
-        String stringa = super.info();
-        stringa += "la classe e'        : " + classe + "\n";
-        stringa += "e' ripetente        : " + isRipetente + "\n";
-        stringa += "il voto minore e'   : " + votoMinore() + "\n";
-        stringa += "il voto maggiore e' : " + votoMaggiore() + "\n";
-        stringa += "la media dei voti e': " + mediaVoti() + "\n";
-        return stringa;
+    public Float votoMaggiore() {
+        Float b = 0f;
+        for (int i = 0; i < voti.size(); i++) {
+            if (voti.get(i) > b) {
+                b = voti.get(i);
+            }
+
+        }
+        return b;
     }
 
+    public Float mediaVoti() {
+        Float f = 0f;
+
+        for (int i = 0; i < voti.size(); i++) {
+            f += voti.get(i);
+
+        }
+        f = f / voti.size();
+
+        return f;
+    }
+
+    @Override
+
+    public String toString(){
+        try {
+            String s = super.info() + "La calsse � " + classe + "/n"
+                    + ((isRipetente == true) ? "� un ripetente" : "non � un ripetente") + "/n";
+            for (int i = 0; i < voti.size(); i++) {
+                s = s + "voto " + voti.get(i) + "/n";
+               
+            }
+            return s;
+        } catch (Exception ex) {
+            Logger.getLogger(Studente2.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+        
+}
+
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * @param args the command line arguments
+     */
 }
